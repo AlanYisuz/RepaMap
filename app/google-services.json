@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "263727423278",
+    "firebase_url": "https://repamap-3cb0f-default-rtdb.firebaseio.com",
+    "project_id": "repamap-3cb0f",
+    "storage_bucket": "repamap-3cb0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263727423278:android:c3e930830335a697c0a4bf",
+        "android_client_info": {
+          "package_name": "com.example.proyectomovil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263727423278-q6gt1to6rachmcririoetq4ubeethfin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnWV5xFyC35JuhuyXD5Wu-p8oQPBCFuYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263727423278-q6gt1to6rachmcririoetq4ubeethfin.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263727423278:android:d2ab383933839681c0a4bf",
+        "android_client_info": {
+          "package_name": "com.example.repmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263727423278-q6gt1to6rachmcririoetq4ubeethfin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnWV5xFyC35JuhuyXD5Wu-p8oQPBCFuYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263727423278-q6gt1to6rachmcririoetq4ubeethfin.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263727423278:android:0f0f6b31d87ae2a7c0a4bf",
+        "android_client_info": {
+          "package_name": "com.example.reppmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263727423278-q6gt1to6rachmcririoetq4ubeethfin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnWV5xFyC35JuhuyXD5Wu-p8oQPBCFuYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263727423278-q6gt1to6rachmcririoetq4ubeethfin.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
