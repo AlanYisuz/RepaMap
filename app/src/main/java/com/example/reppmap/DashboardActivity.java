@@ -108,6 +108,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     //inflate menu options
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //llenando menu
@@ -127,6 +128,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    */
 }
 
 

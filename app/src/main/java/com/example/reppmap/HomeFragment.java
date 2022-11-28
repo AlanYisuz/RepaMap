@@ -2,15 +2,21 @@
 
 package com.example.reppmap;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +61,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);//para mostrar menu option en fragment
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -70,6 +77,46 @@ public class HomeFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         return view;
+    }
+
+    private void checkUserStatus(){
+        //obtener usuario actual
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null){
+            //el usuario sigue signed
+            //mostrar correo del user
+            //mProfile.setText(user.getEmail());
+
+        }else{
+            //el usuario no esta signed, dirigir al mainactivity
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
+        }
+    }
+
+//inflate menu options
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //llenando menu
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    //manjeador del menu options
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //obtener id del item seleccionado
+        int id = item.getItemId();
+        if(id == R.id.action_logout){
+            firebaseAuth.signOut();
+            checkUserStatus();
+        }
+        if(id == R.id.action_add_post){
+            startActivity(new Intent(getActivity(), AddPostActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

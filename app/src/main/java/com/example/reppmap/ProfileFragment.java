@@ -21,6 +21,9 @@ import androidx.fragment.app.Fragment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -128,6 +131,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -395,7 +399,7 @@ public class ProfileFragment extends Fragment {
             case STORAGE_REQUEST_CODE:{
                 //eligiendo de la galeria, primero verificamos si el almacenamiento tiene los permisos habilitados o no
                 if (grantResults.length > 0){
-                    boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     if (writeStorageAccepted){
                         //permisos habilitados
                         pickFromGallery();
@@ -514,4 +518,41 @@ public class ProfileFragment extends Fragment {
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_PICK_CAMERA_CODE);
     }
+
+    private void checkUserStatus(){
+        //obtener usuario actual
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null){
+            //el usuario sigue signed
+            //mostrar correo del user
+            //mProfile.setText(user.getEmail());
+
+        }else{
+            //el usuario no esta signed, dirigir al mainactivity
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //llenando menu
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //obtener id del item seleccionado
+        int id = item.getItemId();
+        if(id == R.id.action_logout){
+            firebaseAuth.signOut();
+            checkUserStatus();
+        }
+        if(id == R.id.action_add_post){
+            startActivity(new Intent(getActivity(), AddPostActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
