@@ -6,17 +6,35 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.example.reppmap.adapters.AdapterPosts;
+import com.example.reppmap.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +45,12 @@ public class HomeFragment extends Fragment {
 
     //firebase
     FirebaseAuth firebaseAuth;
+
+    RecyclerView recyclerView;
+    List<ModelPost> postList;
+    AdapterPosts adapterPosts;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,7 +100,85 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        //recycler view y su propiedades
+        recyclerView = view.findViewById(R.id.postsRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        //mostrar los nuevos posts primero.
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        //set layout para recyclerview
+        recyclerView.setLayoutManager(layoutManager);
+
+        //mostrar
+        postList = new ArrayList<>();
+
+        loadPosts();
+
         return view;
+    }
+
+    private void loadPosts() {
+        //camino de todos los posts
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+        //obtener toda la data de la ref
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+             postList.clear();
+             for (DataSnapshot ds: snapshot.getChildren()){
+                 ModelPost modelPost = ds.getValue(ModelPost.class);
+
+                 postList.add(modelPost);
+
+                 //adaptador
+                 adapterPosts = new AdapterPosts(getActivity(), postList);
+                 //set adapter para recyclerview
+                 recyclerView.setAdapter(adapterPosts);
+
+             }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //en caso de error
+                Toast.makeText(getActivity(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void searchPosts(String searchQuery){
+        //camino de todos los posts
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+        //obtener toda la data de la ref
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postList.clear();
+                for (DataSnapshot ds: snapshot.getChildren()){
+                    ModelPost modelPost = ds.getValue(ModelPost.class);
+
+                    String id = modelPost.getUid();
+                    String titulo = modelPost.getpTitle();
+                    String descr = modelPost.getpDesrc();
+
+                    if (titulo.toLowerCase().contains(searchQuery.toLowerCase()) ||
+                            descr.toLowerCase().contains(searchQuery.toLowerCase())){
+                        postList.add(modelPost);
+                    }
+
+                    //adaptador
+                    adapterPosts = new AdapterPosts(getActivity(), postList);
+                    //set adapter para recyclerview
+                    recyclerView.setAdapter(adapterPosts);
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //en caso de error
+                Toast.makeText(getActivity(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void checkUserStatus(){
@@ -100,6 +202,37 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //llenando menu
         inflater.inflate(R.menu.menu_main, menu);
+        //searchview para buscar posts
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+
+        //search listener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //llamado cuando el usuario presiona search button
+                if (!TextUtils.isEmpty(query)){
+                    searchPosts(query);
+                }
+                else{
+                    loadPosts();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //llamado cuando el usuario introduce cualquier tecla
+                if (!TextUtils.isEmpty(newText)){
+                    searchPosts(newText);
+                }
+                else{
+                    loadPosts();
+                }
+                return false;
+            }
+        });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 

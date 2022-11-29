@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -33,6 +34,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.reppmap.adapters.AdapterPosts;
+import com.example.reppmap.models.ModelPost;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -52,6 +55,7 @@ import com.google.firebase.storage.*;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,6 +81,7 @@ public class ProfileFragment extends Fragment {
     ImageView avatarIv, coverIv;
     TextView nameTv, emailTv, phoneTv;
     FloatingActionButton fab;
+    RecyclerView postsRecyclerViews;
 
     //progress dialog
     ProgressDialog pd;
@@ -89,6 +94,10 @@ public class ProfileFragment extends Fragment {
     //arreglo de permisos que seran requeridos
     String cameraPermissions[];
     String storagePermissions[];
+
+    List<ModelPost> postList;
+    AdapterPosts adapterPosts;
+    String uid;
 
     //uri  de la imagen seleccionada
     Uri image_uri;
@@ -164,6 +173,7 @@ public class ProfileFragment extends Fragment {
         emailTv = view.findViewById(R.id.emailTv);
         phoneTv = view.findViewById(R.id.phoneTv);
         fab = view.findViewById(R.id.fab);
+        postsRecyclerViews = view.findViewById(R.id.recyclerview_posts);
 
         pd = new ProgressDialog(getActivity());
 
@@ -526,6 +536,7 @@ public class ProfileFragment extends Fragment {
             //el usuario sigue signed
             //mostrar correo del user
             //mProfile.setText(user.getEmail());
+            uid = user.getUid();
 
         }else{
             //el usuario no esta signed, dirigir al mainactivity
@@ -533,6 +544,7 @@ public class ProfileFragment extends Fragment {
             getActivity().finish();
         }
     }
+    
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

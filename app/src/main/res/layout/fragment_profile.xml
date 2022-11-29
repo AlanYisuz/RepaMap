@@ -29,6 +29,7 @@
             </ImageView>
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:orientation="horizontal"
@@ -82,6 +83,14 @@
                 </LinearLayout>
 
             </LinearLayout>
+            
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_posts"
+                android:layout_below="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
 
         </RelativeLayout>
