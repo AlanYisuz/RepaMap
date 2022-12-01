@@ -87,7 +87,6 @@
                 android:id="@+id/pLikesTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="200 likes"
                 android:layout_weight="1"
                 android:textColor="@color/purple_500" />
             <TextView
@@ -116,7 +115,8 @@
                 android:text="Me gusta"
                 android:drawableLeft="@drawable/ic_like_white"
                 android:padding="5dp"
-                android:drawablePadding="5dp"/>
+                android:drawablePadding="5dp"
+                android:visibility="gone"/>
             <Button
                 android:id="@+id/commentBtn"
                 android:layout_width="wrap_content"

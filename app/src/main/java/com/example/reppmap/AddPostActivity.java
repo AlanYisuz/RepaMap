@@ -464,6 +464,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pDesrc", description);
                                 hashMap.put("pImage", downloadUri);
                                 hashMap.put("pTime", timeStamp);
+                                hashMap.put("pComments", "0");
 
                                 //camino al almacenamiento
                                 DatabaseReference ref = FirebaseDatabase .getInstance().getReference("Posts");
@@ -513,6 +514,7 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("pDesrc", description);
             hashMap.put("pImage", "noImage");
             hashMap.put("pTime", timeStamp);
+            hashMap.put("pComments","0");
 
             //camino al almacenamiento
             DatabaseReference ref = FirebaseDatabase .getInstance().getReference("Posts");

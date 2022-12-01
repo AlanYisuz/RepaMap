@@ -110,7 +110,6 @@
                             android:id="@+id/pLikesTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="200 likes"
                             android:layout_weight="1"
                             android:textColor="@color/purple_500" />
                         <TextView
@@ -143,7 +142,8 @@
                             android:drawableLeft="@drawable/ic_like_white"
                             android:drawablePadding="5dp"
                             android:padding="5dp"
-                            android:text="Me gusta" />
+                            android:text="Me gusta"
+                            android:visibility="gone"/>
 
 
                     </LinearLayout>
