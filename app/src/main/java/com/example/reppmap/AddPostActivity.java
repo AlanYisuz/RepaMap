@@ -225,7 +225,7 @@ public class AddPostActivity extends AppCompatActivity {
         hashMap.put("uEmail",email);
         hashMap.put("uDp",dp);
         hashMap.put("pTitle",title);
-        hashMap.put("pDescr",description);
+        hashMap.put("pDesrc",description);
         hashMap.put("pImage","noImage");
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
@@ -277,7 +277,7 @@ public class AddPostActivity extends AppCompatActivity {
                             hashMap.put("uEmail",email);
                             hashMap.put("uDp",dp);
                             hashMap.put("pTitle",title);
-                            hashMap.put("pDescr",description);
+                            hashMap.put("pDesrc",description);
                             hashMap.put("pImage",downloadUri);
 
                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
@@ -347,7 +347,7 @@ public class AddPostActivity extends AppCompatActivity {
                                             hashMap.put("uEmail",email);
                                             hashMap.put("uDp",dp);
                                             hashMap.put("pTitle",title);
-                                            hashMap.put("pDescr",description);
+                                            hashMap.put("pDesrc",description);
                                             hashMap.put("pImage",downloadUri);
 
                                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
@@ -398,7 +398,7 @@ public class AddPostActivity extends AppCompatActivity {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     //obtener data
                     editTitle = ""+ds.child("pTitle").getValue();
-                    editDescription = ""+ds.child("pDescr").getValue();
+                    editDescription = ""+ds.child("pDesrc").getValue();
                     editImage = ""+ds.child("pImage").getValue();
 
                     //poner data en la views
@@ -461,7 +461,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("uDp",dp);
                                 hashMap.put("pId",timeStamp);
                                 hashMap.put("pTitle", title);
-                                hashMap.put("pDescr", description);
+                                hashMap.put("pDesrc", description);
                                 hashMap.put("pImage", downloadUri);
                                 hashMap.put("pTime", timeStamp);
 
@@ -510,7 +510,7 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("uDp",dp);
             hashMap.put("pId",timeStamp);
             hashMap.put("pTitle", title);
-            hashMap.put("pDescr", description);
+            hashMap.put("pDesrc", description);
             hashMap.put("pImage", "noImage");
             hashMap.put("pTime", timeStamp);
 
