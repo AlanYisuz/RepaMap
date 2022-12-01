@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Mapa de centros de reparación"
+        android:text="Publicaciones para centros de reparacion"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="italic"

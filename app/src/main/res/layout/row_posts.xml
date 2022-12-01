@@ -68,7 +68,8 @@
             android:id="@+id/pDescriptionTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:text="Descripcion"
+            android:textColor="#5E5555"
             android:autoLink="all"
             />
         <ImageView
