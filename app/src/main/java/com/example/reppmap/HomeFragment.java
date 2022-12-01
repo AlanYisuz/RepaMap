@@ -146,6 +146,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    /*
     private void searchPosts(String searchQuery){
         //camino de todos los posts
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
@@ -180,6 +181,8 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+    */
+
 
     private void checkUserStatus(){
         //obtener usuario actual
@@ -202,6 +205,7 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //llenando menu
         inflater.inflate(R.menu.menu_main, menu);
+        /*
         //searchview para buscar posts
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
@@ -232,7 +236,7 @@ public class HomeFragment extends Fragment {
                 return false;
             }
         });
-
+*/
         super.onCreateOptionsMenu(menu, inflater);
     }
 

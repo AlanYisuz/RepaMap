@@ -48,6 +48,8 @@ public class DashboardActivity extends AppCompatActivity {
         ft1.replace(R.id.content, fragment1, "");
         ft1.commit();
 
+        checkUserStatus();
+
 
     }
 
@@ -104,6 +106,12 @@ public class DashboardActivity extends AppCompatActivity {
         //check en el inicio de la app
         checkUserStatus();
         super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        checkUserStatus();
+        super.onResume();
     }
 
     //inflate menu options
